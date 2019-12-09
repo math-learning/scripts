@@ -1,0 +1,92 @@
+version: '3'
+services:
+  courses-service:
+    container_name: "courses-service-general"
+    build:
+      context: ../courses-service
+      dockerfile: ./Dockerfile
+    ports:
+      - "127.0.0.1:5001:5001"
+    depends_on: 
+      - courses-db
+    networks:
+      - courses
+
+  courses-db:
+    container_name: "courses-db-general"
+    build:
+      context: ../courses-service
+      dockerfile: ./Dockerfile-db
+    networks:
+      - courses
+    volumes:
+      - courses-dbdata:/var/lib/postgresql/data
+
+  users-service:
+    container_name: "users-service-general"
+    build:
+      context: ../users-service
+      dockerfile: ./Dockerfile
+    ports:
+      - "127.0.0.1:7000:7000"
+    depends_on: 
+      - users-db
+    networks:
+      - users
+
+  users-db:
+    container_name: "users-db-general"
+    build:
+      context: ../users-service
+      dockerfile: ./Dockerfile-db
+    networks:
+      - users
+    volumes:
+      - users-dbdata:/var/lib/postgresql/data
+
+  exercises-service:
+    container_name: "exercises-service-general"
+    build:
+      context: ../exercises-service
+      dockerfile: ./Dockerfile
+    ports:
+      - "127.0.0.1:9000:9000"
+    depends_on: 
+      - exercises-db
+    networks:
+      - exercises
+
+  exercises-db:
+    container_name: "exercises-db-general"
+    build:
+      context: ../exercises-service
+      dockerfile: ./Dockerfile-db
+    networks:
+      - exercises
+    volumes:
+      - exercises-dbdata:/var/lib/postgresql/data
+
+  math-solver:
+    build: 
+      context: ../math-solver
+      dockerfile: ./Dockerfile
+    ports: 
+      - "127.0.0.1:5000:5000"
+
+  frontend:
+    build: 
+      context: ../math-learning-frontend
+      dockerfile: ./Dockerfile-beta
+    ports: 
+      - "127.0.0.1:3000:3000"
+
+volumes:
+  courses-dbdata:
+  users-dbdata:
+  exercises-dbdata:
+
+networks: 
+  courses:
+  users:
+  exercises:
+  
