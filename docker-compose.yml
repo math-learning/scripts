@@ -11,6 +11,7 @@ services:
       - courses-db
     networks:
       - courses
+      - general
 
   courses-db:
     container_name: "courses-db-general"
@@ -33,6 +34,7 @@ services:
       - users-db
     networks:
       - users
+      - general
 
   users-db:
     container_name: "users-db-general"
@@ -55,6 +57,7 @@ services:
       - exercises-db
     networks:
       - exercises
+      - general
 
   exercises-db:
     container_name: "exercises-db-general"
@@ -72,13 +75,15 @@ services:
       dockerfile: ./Dockerfile
     ports: 
       - "127.0.0.1:5000:5000"
+    networks:
+      - general
 
-  frontend:
-    build: 
-      context: ../math-learning-frontend
-      dockerfile: ./Dockerfile-beta
-    ports: 
-      - "127.0.0.1:3000:3000"
+  # frontend:
+  #   build: 
+  #     context: ../math-learning-frontend
+  #     dockerfile: ./Dockerfile-beta
+  #   ports: 
+  #     - "127.0.0.1:3000:3000"
 
 volumes:
   courses-dbdata:
@@ -89,4 +94,5 @@ networks:
   courses:
   users:
   exercises:
+  general:
   
