@@ -1,0 +1,8 @@
+FROM node:10
+WORKDIR /code
+RUN git clone https://github.com/math-learning/users-service.git
+RUN mv -v ./users-service/* .
+RUN npm install
+EXPOSE 7000
+ENV DOCKER true
+CMD ["npm", "run", "start:watch"]

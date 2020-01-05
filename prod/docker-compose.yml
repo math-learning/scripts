@@ -1,0 +1,88 @@
+version: '3'
+services:
+  courses-service:
+    container_name: "courses-service-prod"
+    build:
+      context: .
+      dockerfile: ./Dockerfile-courses
+    ports:
+      - "127.0.0.1:5001:5001"
+    depends_on: 
+      - courses-db
+    networks:
+      - courses
+      - general
+
+  courses-db:
+    container_name: "courses-db-prod"
+    build:
+      context: .
+      dockerfile: ./Dockerfile-courses-db
+    networks:
+      - courses
+
+  users-service:
+    container_name: "users-service-prod"
+    build:
+      context: .
+      dockerfile: ./Dockerfile-users
+    ports:
+      - "127.0.0.1:7000:7000"
+    depends_on: 
+      - users-db
+    networks:
+      - users
+      - general
+
+  users-db:
+    container_name: "users-db-prod"
+    build:
+      context: .
+      dockerfile: ./Dockerfile-users-db
+    networks:
+      - users
+
+  exercises-service:
+    container_name: "exercises-service-prod"
+    build:
+      context: .
+      dockerfile: ./Dockerfile-exercises
+    ports:
+      - "127.0.0.1:9000:9000"
+    depends_on: 
+      - exercises-db
+    networks:
+      - exercises
+      - general
+
+  exercises-db:
+    container_name: "exercises-db-prod"
+    build:
+      context: .
+      dockerfile: ./Dockerfile-exercises-db
+    networks:
+      - exercises
+
+  math-solver:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-math-solver
+    ports: 
+      - "127.0.0.1:5000:5000"
+    networks:
+      - general
+
+  frontend:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile-frontend
+    ports: 
+      - "127.0.0.1:3000:3000"
+
+
+networks: 
+  courses:
+  users:
+  exercises:
+  general:
+  
