@@ -5,7 +5,8 @@ FROM node:10
 
 WORKDIR /code
 RUN git clone https://github.com/math-learning/courses-service.git
-RUN mv -v /code/courses-service/* /code
+WORKDIR ./courses-service
+RUN git pull
 RUN npm install
 EXPOSE 5001
 ENV DOCKER true

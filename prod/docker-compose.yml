@@ -64,6 +64,7 @@ services:
       - exercises
 
   math-solver:
+    container_name: "math-solver-prod"
     build:
       context: .
       dockerfile: ./Dockerfile-math-solver
@@ -73,6 +74,7 @@ services:
       - general
 
   frontend:
+    container_name: "frontend-prod"
     build: 
       context: .
       dockerfile: ./Dockerfile-frontend

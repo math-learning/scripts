@@ -1,7 +1,9 @@
 FROM python:3.7.3
 WORKDIR /code
 RUN git clone https://github.com/math-learning/math-solver.git
-RUN mv -v ./math-solver/mathlearning/* .
+WORKDIR ./math-solver
+RUN git pull
+WORKDIR ./mathlearning
 RUN pip3 install -r requirements.txt
 EXPOSE 5000
 CMD [ "python", "./manage.py", "runserver", "0.0.0.0:5000" ]

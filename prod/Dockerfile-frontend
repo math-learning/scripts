@@ -4,7 +4,8 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 WORKDIR /usr/src/app
 RUN git clone https://github.com/math-learning/math-learning-frontend.git
-RUN mv -v ./math-learning-frontend/* .
+WORKDIR ./math-learning-frontend 
+RUN git pull
 RUN npm install --only=dev
 RUN npm install --silent
 
