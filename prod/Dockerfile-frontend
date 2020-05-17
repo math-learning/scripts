@@ -1,7 +1,7 @@
 FROM node:10
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
-
+ARG CACHE_DATE=2016-01-01
 WORKDIR /usr/src/app
 RUN git clone https://github.com/math-learning/math-learning-frontend.git
 WORKDIR ./math-learning-frontend 
