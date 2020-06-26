@@ -3,8 +3,8 @@ WORKDIR /code
 ARG CACHE_DATE=2016-01-01
 RUN git clone https://github.com/math-learning/math-solver.git
 WORKDIR ./math-solver
+ARG CACHE_DATE=2016-01-01
 RUN git pull
-WORKDIR ./mathlearning
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r ./requirements.txt
 EXPOSE 5000
 CMD [ "python", "./manage.py", "runserver", "0.0.0.0:5000" ]

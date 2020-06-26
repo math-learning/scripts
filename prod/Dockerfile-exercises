@@ -3,6 +3,7 @@ WORKDIR /code
 ARG CACHE_DATE=2016-01-01
 RUN git clone https://github.com/math-learning/exercises-service.git
 WORKDIR ./exercises-service 
+ARG CACHE_DATE=2016-01-01
 RUN git pull
 RUN npm install
 EXPOSE 9000
